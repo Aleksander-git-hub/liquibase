@@ -1,0 +1,3 @@
+DROP TABLE departments;
+
+OK

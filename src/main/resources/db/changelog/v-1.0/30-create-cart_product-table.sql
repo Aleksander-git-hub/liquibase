@@ -1,0 +1,6 @@
+CREATE TABLE cart_product(
+    cart_id INTEGER REFERENCES carts(id) ON DELETE RESTRICT,
+    item_id INTEGER REFERENCES items(id) ON DELETE RESTRICT
+);
+
+OK

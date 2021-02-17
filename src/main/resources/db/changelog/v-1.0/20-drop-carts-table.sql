@@ -1,0 +1,3 @@
+DROP TABLE carts;
+
+OK
