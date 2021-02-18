@@ -8,9 +8,12 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ItemPlainDto {
+
     private Long id;
 
     private String name;
 
-    //private Long departmentId; // department id
+    private Double price;
+
+    private Long departmentId; // department id
 }

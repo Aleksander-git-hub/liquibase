@@ -10,7 +10,7 @@ import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
 
 @Mapper(componentModel = "spring")
-//@DecoratedWith(ItemMapperDecorator.class)
+@DecoratedWith(ItemMapperDecorator.class)
 public interface ItemMapper {
 
     ItemEntity toEntity(ItemCreationDto itemCreationDto);
@@ -22,6 +22,5 @@ public interface ItemMapper {
 
     ItemDto toDto(ItemEntity itemEntity);
 
-    //@Mapping(source = "department", target = "departmentId")
     ItemPlainDto toPlainDto(ItemEntity itemEntity);
 }

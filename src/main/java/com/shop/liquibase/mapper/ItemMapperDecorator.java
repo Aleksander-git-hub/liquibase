@@ -1,4 +1,3 @@
-/*
 package com.shop.liquibase.mapper;
 
 import com.shop.liquibase.dto.plainDto.ItemPlainDto;
@@ -10,10 +9,10 @@ public abstract class ItemMapperDecorator implements ItemMapper {
     @Autowired
     private ItemMapper delegate;
 
+    @Override
     public ItemPlainDto toPlainDto(ItemEntity itemEntity) {
         ItemPlainDto item = delegate.toPlainDto(itemEntity);
-        item.setDepartment(itemEntity.getDepartment().getId());
+        item.setDepartmentId(itemEntity.getDepartment().getId());
         return item;
     }
 }
-*/

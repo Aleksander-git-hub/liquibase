@@ -92,6 +92,7 @@ public class DepartmentService {
                     ("Can't add item! Item was deleted for id: " + itemId);
         }
         existingDepartment.getItems().add(existingItem);
+        existingItem.setDepartment(existingDepartment);
         return departmentRepository.save(existingDepartment);
     }
 
