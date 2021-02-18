@@ -19,7 +19,7 @@ public class ItemCreationDto {
 
     private Double price;
 
-    private Boolean deleted;
+    private Boolean deleted = false;
 
     private List<CartCreationDto> carts;
 
