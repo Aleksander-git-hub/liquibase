@@ -1,6 +1,7 @@
 CREATE TABLE carts(
-    id SERIAL PRIMARY KEY,
-    user_id INTEGER REFERENCES users(id) ON DELETE RESTRICT
+    id bigserial PRIMARY KEY,
+    broken BOOLEAN,
+    user_id BIGINT REFERENCES users(id) ON DELETE RESTRICT
 );
 
 OK

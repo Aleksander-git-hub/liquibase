@@ -12,7 +12,7 @@
                  relativeToChangelogFile="true"
                  splitStatements="true"
                  stripComments="true"
-                 path="40-create-cart_product-table.sql"/>
+                 path="40-create-cart_item-table.sql"/>
         <rollback>
             <sqlFile dbms="postgresql"
                      encoding="utf8"
@@ -20,7 +20,7 @@
                      relativeToChangelogFile="true"
                      splitStatements="true"
                      stripComments="true"
-                     path="40-drop-cart_product-table.sql"/>
+                     path="40-drop-cart_item-table.sql"/>
         </rollback>
     </changeSet>
 

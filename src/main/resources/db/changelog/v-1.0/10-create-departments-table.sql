@@ -1,6 +1,7 @@
 CREATE TABLE departments(
-    id SERIAL PRIMARY KEY,
-    name VARCHAR (255)
+    id bigserial PRIMARY KEY,
+    name VARCHAR (255),
+    deleted BOOLEAN
 );
 
 OK

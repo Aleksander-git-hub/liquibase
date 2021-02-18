@@ -9,6 +9,6 @@
     <include file="10-changeset-departments-table.xml" relativeToChangelogFile="true"/>
     <include file="20-changeset-items-table.xml" relativeToChangelogFile="true"/>
     <include file="30-changeset-carts-table.xml" relativeToChangelogFile="true"/>
-    <include file="40-changeset-cart_product-table.xml" relativeToChangelogFile="true"/>
+    <include file="40-changeset-cart_item-table.xml" relativeToChangelogFile="true"/>
 
 </databaseChangeLog>

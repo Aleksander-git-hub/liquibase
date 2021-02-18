@@ -27,7 +27,7 @@ public class ItemEntity {
     private Boolean deleted;
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinTable(name = "cart_product", joinColumns = @JoinColumn(name = "item_id"),
+    @JoinTable(name = "cart_item", joinColumns = @JoinColumn(name = "item_id"),
             inverseJoinColumns = @JoinColumn(name = "cart_id"))
     private List<CartEntity> carts;
 

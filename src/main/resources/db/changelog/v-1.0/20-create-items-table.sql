@@ -1,9 +1,10 @@
 CREATE TABLE items(
-    id serial PRIMARY KEY ,
+    id bigserial PRIMARY KEY ,
     name VARCHAR (255),
     description TEXT,
-    price NUMERIC,
-    department_id INTEGER REFERENCES departments(id) ON DELETE RESTRICT
+    price DOUBLE PRECISION,
+    deleted BOOLEAN,
+    department_id BIGINT REFERENCES departments(id) ON DELETE RESTRICT
 );
 
 OK
