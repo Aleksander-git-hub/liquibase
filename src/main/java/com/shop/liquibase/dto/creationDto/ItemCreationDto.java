@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -18,4 +20,8 @@ public class ItemCreationDto {
     private Double price;
 
     private Boolean deleted;
+
+    private List<CartCreationDto> carts;
+
+    private DepartmentCreationDto department;
 }

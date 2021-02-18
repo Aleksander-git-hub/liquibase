@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -19,4 +21,6 @@ public class UserCreationDto {
     private String email;
 
     private Boolean deleted = false;
+
+    private List<CartCreationDto> carts;
 }

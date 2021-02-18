@@ -2,6 +2,8 @@ package com.shop.liquibase.service;
 
 import com.shop.liquibase.dto.creationDto.CartCreationDto;
 import com.shop.liquibase.entity.CartEntity;
+import com.shop.liquibase.entity.ItemEntity;
+import com.shop.liquibase.exceptions.AlreadyAssignException;
 import com.shop.liquibase.exceptions.NotFoundException;
 import com.shop.liquibase.mapper.CartMapper;
 import com.shop.liquibase.repository.CartRepository;
@@ -18,6 +20,9 @@ public class CartService {
 
     @Autowired
     private CartMapper cartMapper;
+
+    @Autowired
+    private ItemService itemService;
 
     public CartEntity saveCart(CartCreationDto cartCreationDto) {
         return cartRepository.save(cartMapper.toEntity(cartCreationDto));
@@ -39,5 +44,35 @@ public class CartService {
         }
         existingCart.setBroken(true);
         cartRepository.save(existingCart);
+    }
+
+    public CartEntity addItemToCart(Long cartId, Long itemId) {
+        CartEntity existingCart = getCartById(cartId);
+        ItemEntity existingItem = itemService.getItemById(itemId);
+        if (existingItem.getDeleted()) {
+            throw new NotFoundException
+                    ("Can't add item! Item was deleted for id: " + itemId);
+        }
+        if (existingItem.getCarts().contains(existingCart)) {
+            throw new AlreadyAssignException
+                    ("Item with id: " + itemId + " already add to this cart for id :" + cartId);
+        }
+        if (existingCart.getBroken()) {
+            throw new NotFoundException
+                    ("Can't add item! Cart was broken for id: " + cartId);
+        }
+        existingCart.getItems().add(existingItem);
+        return cartRepository.save(existingCart);
+    }
+
+    public CartEntity removeItemFromCart(Long cartId, Long itemId) {
+        CartEntity existingCart = getCartById(cartId);
+        ItemEntity existingItem = itemService.getItemById(itemId);
+        if (!existingCart.getItems().contains(existingItem)) {
+            throw new NotFoundException
+                    ("Cart with id: " + cartId + " does not have a item for id :" + itemId);
+        }
+        existingCart.getItems().remove(existingItem);
+        return cartRepository.save(existingCart);
     }
 }

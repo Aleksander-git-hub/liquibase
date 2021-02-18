@@ -1,7 +1,12 @@
 package com.shop.liquibase.service;
 
 import com.shop.liquibase.dto.creationDto.DepartmentCreationDto;
+import com.shop.liquibase.dto.plainDto.DepartmentPlainDto;
+import com.shop.liquibase.entity.CartEntity;
 import com.shop.liquibase.entity.DepartmentEntity;
+import com.shop.liquibase.entity.ItemEntity;
+import com.shop.liquibase.entity.UserEntity;
+import com.shop.liquibase.exceptions.AlreadyAssignException;
 import com.shop.liquibase.exceptions.NotFoundException;
 import com.shop.liquibase.mapper.DepartmentMapper;
 import com.shop.liquibase.repository.DepartmentRepository;
@@ -19,6 +24,9 @@ public class DepartmentService {
 
     @Autowired
     private DepartmentMapper departmentMapper;
+
+    @Autowired
+    private ItemService itemService;
 
     public DepartmentEntity saveDepartment(DepartmentCreationDto departmentCreationDto) {
         departmentCreationDtoValidate(departmentCreationDto);
@@ -60,5 +68,25 @@ public class DepartmentService {
         if (StringUtils.isEmpty(departmentCreationDto.getName())) {
             throw new NotFoundException("Fields are empty or incorrect! Please, check this!");
         }
+    }
+
+    public DepartmentEntity addItemToDepartment(Long departmentId, Long itemId) {
+        DepartmentEntity existingDepartment = getDepartmentById(departmentId);
+        ItemEntity existingItem = itemService.getItemById(itemId);
+        if (existingDepartment.getDeleted()) {
+            throw new NotFoundException
+                    ("Can't add item! Department was deleted for id: " + departmentId);
+        }
+        if (existingDepartment.getItems().contains(existingItem)) {
+            throw new AlreadyAssignException
+                    ("Department with id: " + departmentId +
+                            " already has this item for id :" + itemId);
+        }
+        if (existingItem.getDeleted()) {
+            throw new NotFoundException
+                    ("Can't add item! Item was deleted for id: " + itemId);
+        }
+        existingDepartment.getItems().add(existingItem);
+        return departmentRepository.save(existingDepartment);
     }
 }

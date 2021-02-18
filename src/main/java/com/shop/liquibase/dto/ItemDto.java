@@ -1,6 +1,4 @@
 package com.shop.liquibase.dto;
-
-import com.shop.liquibase.entity.DepartmentEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -24,5 +22,5 @@ public class ItemDto {
 
     private List<CartDto> carts;
 
-    private DepartmentEntity department;
+    private DepartmentDto department;
 }
