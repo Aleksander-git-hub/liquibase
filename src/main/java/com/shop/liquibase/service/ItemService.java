@@ -8,6 +8,7 @@ import com.shop.liquibase.repository.ItemRepository;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -20,6 +21,7 @@ public class ItemService {
     @Autowired
     private ItemMapper itemMapper;
 
+    @Transactional
     public ItemEntity saveItem(ItemCreationDto itemCreationDto) {
         itemCreationDtoValidate(itemCreationDto);
         return itemRepository.save(itemMapper.toEntity(itemCreationDto));
@@ -34,6 +36,7 @@ public class ItemService {
         return itemRepository.findAll();
     }
 
+    @Transactional
     public ItemEntity updateItemById(ItemCreationDto itemCreationDto, Long itemId) {
         ItemEntity existingItem = getItemById(itemId);
         itemCreationDtoValidate(itemCreationDto);
@@ -44,6 +47,7 @@ public class ItemService {
         return itemRepository.save(existingItem);
     }
 
+    @Transactional
     public void deleteItemById(Long itemId) {
         ItemEntity existingItem = getItemById(itemId);
         if (existingItem.getDeleted()) {

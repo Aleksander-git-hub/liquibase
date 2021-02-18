@@ -6,9 +6,9 @@
                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
 
     <include file="01-changeset-users-table.xml" relativeToChangelogFile="true"/>
-    <include file="10-changeset-items-table.xml" relativeToChangelogFile="true"/>
-    <include file="20-changeset-cart-table.xml" relativeToChangelogFile="true"/>
-    <include file="30-changeset-cart_product-table.xml" relativeToChangelogFile="true"/>
-    <include file="40-changeset-departments-table.xml" relativeToChangelogFile="true"/>
+    <include file="10-changeset-departments-table.xml" relativeToChangelogFile="true"/>
+    <include file="20-changeset-items-table.xml" relativeToChangelogFile="true"/>
+    <include file="30-changeset-carts-table.xml" relativeToChangelogFile="true"/>
+    <include file="40-changeset-cart_product-table.xml" relativeToChangelogFile="true"/>
 
 </databaseChangeLog>

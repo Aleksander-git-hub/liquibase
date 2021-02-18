@@ -1,3 +1,4 @@
+/*
 package com.shop.liquibase.mapper;
 
 import com.shop.liquibase.dto.plainDto.ItemPlainDto;
@@ -15,3 +16,4 @@ public abstract class ItemMapperDecorator implements ItemMapper {
         return item;
     }
 }
+*/

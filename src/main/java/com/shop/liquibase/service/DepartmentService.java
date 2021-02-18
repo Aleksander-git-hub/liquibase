@@ -13,6 +13,7 @@ import com.shop.liquibase.repository.DepartmentRepository;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -28,6 +29,7 @@ public class DepartmentService {
     @Autowired
     private ItemService itemService;
 
+    @Transactional
     public DepartmentEntity saveDepartment(DepartmentCreationDto departmentCreationDto) {
         departmentCreationDtoValidate(departmentCreationDto);
         return departmentRepository.save(departmentMapper.toEntity(departmentCreationDto));
@@ -42,6 +44,7 @@ public class DepartmentService {
         return departmentRepository.findAll();
     }
 
+    @Transactional
     public DepartmentEntity updateDepartmentById(DepartmentCreationDto departmentCreationDto,
                                                  Long departmentId) {
         DepartmentEntity existingDepartment = getDepartmentById(departmentId);
@@ -55,6 +58,7 @@ public class DepartmentService {
         return departmentRepository.save(existingDepartment);
     }
 
+    @Transactional
     public void deleteDepartmentById(Long departmentId) {
         DepartmentEntity existingDepartment = getDepartmentById(departmentId);
         if (existingDepartment.getDeleted()) {
@@ -70,6 +74,7 @@ public class DepartmentService {
         }
     }
 
+    @Transactional
     public DepartmentEntity addItemToDepartment(Long departmentId, Long itemId) {
         DepartmentEntity existingDepartment = getDepartmentById(departmentId);
         ItemEntity existingItem = itemService.getItemById(itemId);
@@ -87,6 +92,19 @@ public class DepartmentService {
                     ("Can't add item! Item was deleted for id: " + itemId);
         }
         existingDepartment.getItems().add(existingItem);
+        return departmentRepository.save(existingDepartment);
+    }
+
+    @Transactional
+    public DepartmentEntity removeItemFromDepartment(Long departmentId, Long itemId) {
+        DepartmentEntity existingDepartment = getDepartmentById(departmentId);
+        ItemEntity existingItem = itemService.getItemById(itemId);
+        if (!existingDepartment.getItems().contains(existingItem)) {
+            throw new NotFoundException
+                    ("Department with id: " + departmentId +
+                            " does not have a item for id :" + itemId);
+        }
+        existingDepartment.getItems().remove(existingItem);
         return departmentRepository.save(existingDepartment);
     }
 }

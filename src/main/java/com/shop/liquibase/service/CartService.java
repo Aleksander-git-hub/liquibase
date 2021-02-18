@@ -9,6 +9,7 @@ import com.shop.liquibase.mapper.CartMapper;
 import com.shop.liquibase.repository.CartRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -24,6 +25,7 @@ public class CartService {
     @Autowired
     private ItemService itemService;
 
+    @Transactional
     public CartEntity saveCart(CartCreationDto cartCreationDto) {
         return cartRepository.save(cartMapper.toEntity(cartCreationDto));
     }
@@ -37,6 +39,7 @@ public class CartService {
         return cartRepository.findAll();
     }
 
+    @Transactional
     public void brakeDownCartById(Long cartId) {
         CartEntity existingCart = getCartById(cartId);
         if (existingCart.getBroken()) {
@@ -46,6 +49,7 @@ public class CartService {
         cartRepository.save(existingCart);
     }
 
+    @Transactional
     public CartEntity addItemToCart(Long cartId, Long itemId) {
         CartEntity existingCart = getCartById(cartId);
         ItemEntity existingItem = itemService.getItemById(itemId);
@@ -65,6 +69,7 @@ public class CartService {
         return cartRepository.save(existingCart);
     }
 
+    @Transactional
     public CartEntity removeItemFromCart(Long cartId, Long itemId) {
         CartEntity existingCart = getCartById(cartId);
         ItemEntity existingItem = itemService.getItemById(itemId);

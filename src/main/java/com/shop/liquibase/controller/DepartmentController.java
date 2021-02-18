@@ -62,4 +62,11 @@ public class DepartmentController {
         return departmentMapper
         .toPlainDto(departmentService.addItemToDepartment(departmentId, itemId));
     }
+
+    @DeleteMapping(value = "/department/{departmentId}/item/{itemId}")
+    public DepartmentPlainDto removeItemFromDepartment
+            (@PathVariable Long departmentId, @PathVariable Long itemId) {
+        return departmentMapper
+                .toPlainDto(departmentService.removeItemFromDepartment(departmentId, itemId));
+    }
 }

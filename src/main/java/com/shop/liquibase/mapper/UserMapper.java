@@ -12,12 +12,12 @@ public interface UserMapper {
 
     UserEntity toEntity(UserCreationDto userCreationDto);
 
+    UserDto toDto(UserEntity userEntity);
+
+    UserCreationDto toCreationDto(UserEntity userEntity);
+
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "deleted", ignore = true)
     void updateUserEntityFromUserCreationDto(UserCreationDto source,
                                              @MappingTarget UserEntity target);
-
-    UserDto toDto(UserEntity userEntity);
-
-    UserCreationDto toCreationDto(UserEntity userEntity);
 }

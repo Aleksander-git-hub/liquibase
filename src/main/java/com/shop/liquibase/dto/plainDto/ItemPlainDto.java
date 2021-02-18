@@ -12,5 +12,5 @@ public class ItemPlainDto {
 
     private String name;
 
-    private Long department; // department id
+    //private Long departmentId; // department id
 }
