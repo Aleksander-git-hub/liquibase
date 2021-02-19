@@ -106,6 +106,7 @@ public class DepartmentService {
                             " does not have a item for id :" + itemId);
         }
         existingDepartment.getItems().remove(existingItem);
+        existingItem.setDepartment(null);
         return departmentRepository.save(existingDepartment);
     }
 }
