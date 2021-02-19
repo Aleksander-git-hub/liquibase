@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class UserService {
@@ -81,13 +82,18 @@ public class UserService {
         }
         if (existingUser.getCarts().contains(existingCart)) {
             throw new AlreadyAssignException
-                    ("User with id: " + userId + " already has this cart for id :" + cartId);
+                    ("User with id: " + userId + " already has this cart for id:" + cartId);
+        }
+        if (Objects.nonNull(existingCart.getUser())) {
+            throw new AlreadyAssignException
+                    ("Can't add this cart! Cart already assign other user.");
         }
         if (existingCart.getBroken()) {
             throw new NotFoundException
                     ("Can't add cart! Cart was broken for id: " + cartId);
         }
         existingUser.getCarts().add(existingCart);
+        existingCart.setUser(existingUser);
         return userRepository.save(existingUser);
     }
 
@@ -100,6 +106,7 @@ public class UserService {
                     ("User with id: " + userId + " does not have a cart for id :" + cartId);
         }
         existingUser.getCarts().remove(existingCart);
+        existingCart.setUser(null);
         return userRepository.save(existingUser);
     }
 }
