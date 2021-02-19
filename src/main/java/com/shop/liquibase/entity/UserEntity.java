@@ -28,6 +28,8 @@ public class UserEntity {
 
     private Boolean deleted;
 
+    private Integer age;
+
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
     private List<CartEntity> carts;
 }
