@@ -20,8 +20,8 @@ public abstract class DepartmentMapperDecorator implements DepartmentMapper {
         DepartmentPlainDto department = delegate.toPlainDto(departmentEntity);
         if (!CollectionUtils.isEmpty(departmentEntity.getItems())) {
             department.setItems(departmentEntity.getItems().stream()
-            .map(itemMapper::toPlainDto)
-            .collect(Collectors.toList()));
+                    .map(itemMapper::toPlainDto)
+                    .collect(Collectors.toList()));
         }
         return department;
     }

@@ -15,5 +15,7 @@ public class ItemPlainDto {
 
     private Double price;
 
-    private Long departmentId; // department id
+    private Boolean deleted;
+
+    private Long department; // department id
 }

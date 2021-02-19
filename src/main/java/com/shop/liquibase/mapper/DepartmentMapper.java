@@ -22,5 +22,6 @@ public interface DepartmentMapper {
 
     DepartmentDto toDto(DepartmentEntity departmentEntity);
 
+    @Mapping(target = "items", ignore = true)
     DepartmentPlainDto toPlainDto(DepartmentEntity departmentEntity);
 }

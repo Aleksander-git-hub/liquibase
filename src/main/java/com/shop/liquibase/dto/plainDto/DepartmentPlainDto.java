@@ -15,5 +15,7 @@ public class DepartmentPlainDto {
 
     private String name;
 
+    private Boolean deleted;
+
     private List<ItemPlainDto> items;
 }

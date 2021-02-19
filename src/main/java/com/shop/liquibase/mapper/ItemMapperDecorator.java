@@ -12,7 +12,9 @@ public abstract class ItemMapperDecorator implements ItemMapper {
     @Override
     public ItemPlainDto toPlainDto(ItemEntity itemEntity) {
         ItemPlainDto item = delegate.toPlainDto(itemEntity);
-        item.setDepartmentId(itemEntity.getDepartment().getId());
+        if (itemEntity.getDepartment() != null) {
+            item.setDepartment(itemEntity.getDepartment().getId());
+        }
         return item;
     }
 }
